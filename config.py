@@ -73,6 +73,14 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    #Control brightness and audio via laptop's FN keys
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pulseaudio-ctl up"), desc="Volume +5%"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pulseaudio-ctl down"), desc="Volume -5%"),
+    Key([], "XF86AudioMute", lazy.spawn("pulseaudio-ctl mute"), desc="Toggle mute"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%"), desc="Screen brightness +5%"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-"), desc="Screen brightness -5%"),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -138,8 +146,6 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.QuickExit(),
