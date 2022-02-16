@@ -75,7 +75,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    #Control brightness and audio via laptop's FN keys
+    # Control brightness and audio via laptop's FN keys
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pulseaudio-ctl up"), desc="Volume +5%"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pulseaudio-ctl down"), desc="Volume -5%"),
     Key([], "XF86AudioMute", lazy.spawn("pulseaudio-ctl mute"), desc="Toggle mute"),
@@ -140,15 +140,13 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
+                widget.TextBox(text='☀', fontsize=24),
+                widget.Backlight(backlight_name='intel_backlight'),
+                widget.TextBox(text='♪', fontsize=16),
+	            widget.Volume(),
+                widget.Spacer(length=16),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
+                widget.Clock(format="%y %m %d | %u | %H %M %S"),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
