@@ -115,11 +115,11 @@ layouts = [
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
-    # layout.Matrix(),
+    layout.Matrix(),
     # layout.MonadTall(),
     # layout.MonadWide(),
-     layout.RatioTile(border_focus="#ff0000"),
-     layout.Tile(border_focus="#ff0000"),
+    layout.RatioTile(border_focus="#ff0000"),
+    layout.Tile(border_focus="#ff0000"),
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
@@ -127,10 +127,11 @@ layouts = [
 
 widget_defaults = dict(
     font="sans",
-    fontsize=12,
+    fontsize=14,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
+
 
 screens = [
     Screen(
@@ -140,9 +141,16 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
+                widget.TextBox(text='⚡', fontsize=24),
+                widget.Battery(
+                    charge_char='▲', 
+                    discharge_char='▼', 
+                    format="{char} {percent:2.0%} {hour:d}:{min:02d}", 
+                    update_interval=15
+                    ),
                 widget.TextBox(text='☀', fontsize=24),
                 widget.Backlight(backlight_name='intel_backlight'),
-                widget.TextBox(text='♪', fontsize=16),
+                widget.TextBox(text='♪', fontsize=20),
 	            widget.Volume(),
                 widget.Spacer(length=16),
                 widget.Systray(),
