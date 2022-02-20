@@ -126,10 +126,9 @@ layouts = [
 ]
 
 widget_defaults = dict(
-
     font="mono",
     fontsize=16,
-    padding=3,
+    padding=2,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -139,49 +138,51 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.CurrentLayout(),
-                widget.GroupBox(),
+                widget.GroupBox(hide_unused=True),
                 widget.Prompt(),
                 widget.Spacer(),
+                widget.TextBox(text='|', fontsize=24),
                 widget.CPU(format="{load_percent:0>4}%"),
-                widget.ThermalSensor(),
+                widget.ThermalSensor(fmt='{0[0]}{0[1]}C'),
                 widget.CPUGraph(
                     border_color='444444', 
                     fill_color='ff0000', 
                     graph_color='ff0000', 
-                    samples=60,
                     margin_y=0
                     ),
-                widget.Memory(format="{MemPercent: >5}%"),
+                widget.Memory(format="{MemPercent}%"),
                 widget.MemoryGraph(
                     border_color='444444', 
-                    fill_color='00ff00', 
+                    fill_color='00ff0080', 
                     graph_color='00ff00', 
-                    samples=60,
                     margin_y=0
                     ),
-                widget.Net(format='▼{down: <8}▲{up: <8}'),
+                widget.Net(format='▼{down: >8} ▲{up: >7}'),
                 widget.NetGraph(
                     border_color='444444', 
-                    fill_color='0000ff', 
+                    fill_color='0000ff80', 
                     graph_color='0000ff', 
-                    samples=60,
                     margin_y=0
                     ),
-                widget.TextBox(text='⚡', fontsize=24),
+                widget.Wlan(interface='wlp4s0', format='{essid} {percent:2.0%}'),
+                widget.TextBox(text='|', fontsize=24),
                 widget.Battery(
                     charge_char='▲', 
                     discharge_char='▼', 
-                    format="{char} {percent:2.0%} {hour:d}:{min:02d}", 
-                    update_interval=15
+                    format="{char}{percent:2.0%} {hour:d}:{min:02d}", 
+                    update_interval=15,
+                    hide_threshold=0.95
                     ),
                 widget.TextBox(text='☀', fontsize=24),
                 widget.Backlight(backlight_name='intel_backlight'),
                 widget.TextBox(text='♪', fontsize=24),
 	            widget.Volume(),
-                widget.Systray(),
-                widget.Clock(format="| %y %m %d | %u | %H %M %S"),
+                #widget.Systray(),
+                widget.TextBox(text='|', fontsize=24),
+                widget.Clock(format="%y %m %d %u %H %M %S "),
             ],
             24,
+            background="#00000080"
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
