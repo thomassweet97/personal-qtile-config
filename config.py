@@ -126,8 +126,9 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=14,
+
+    font="mono",
+    fontsize=16,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -140,7 +141,32 @@ screens = [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
                 widget.Prompt(),
-                widget.WindowName(),
+                widget.Spacer(),
+                widget.CPU(format="{load_percent:0>4}%"),
+                widget.ThermalSensor(),
+                widget.CPUGraph(
+                    border_color='444444', 
+                    fill_color='ff0000', 
+                    graph_color='ff0000', 
+                    samples=60,
+                    margin_y=0
+                    ),
+                widget.Memory(format="{MemPercent: >5}%"),
+                widget.MemoryGraph(
+                    border_color='444444', 
+                    fill_color='00ff00', 
+                    graph_color='00ff00', 
+                    samples=60,
+                    margin_y=0
+                    ),
+                widget.Net(format='▼{down: <8}▲{up: <8}'),
+                widget.NetGraph(
+                    border_color='444444', 
+                    fill_color='0000ff', 
+                    graph_color='0000ff', 
+                    samples=60,
+                    margin_y=0
+                    ),
                 widget.TextBox(text='⚡', fontsize=24),
                 widget.Battery(
                     charge_char='▲', 
@@ -150,11 +176,10 @@ screens = [
                     ),
                 widget.TextBox(text='☀', fontsize=24),
                 widget.Backlight(backlight_name='intel_backlight'),
-                widget.TextBox(text='♪', fontsize=20),
+                widget.TextBox(text='♪', fontsize=24),
 	            widget.Volume(),
-                widget.Spacer(length=16),
                 widget.Systray(),
-                widget.Clock(format="%y %m %d | %u | %H %M %S"),
+                widget.Clock(format="| %y %m %d | %u | %H %M %S"),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
