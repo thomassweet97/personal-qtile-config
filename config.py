@@ -141,8 +141,9 @@ screens = [
                 widget.GroupBox(hide_unused=True),
                 widget.Prompt(),
                 widget.Spacer(),
-                widget.TextBox(text='|', fontsize=24),
-                widget.CPU(format="{load_percent:0>4}%"),
+
+                #System information monitors
+                widget.CPU(format="{load_percent: >5}%"),
                 widget.ThermalSensor(fmt='{0[0]}{0[1]}C'),
                 widget.CPUGraph(
                     border_color='444444', 
@@ -153,33 +154,35 @@ screens = [
                 widget.Memory(format="{MemPercent}%"),
                 widget.MemoryGraph(
                     border_color='444444', 
-                    fill_color='00ff0080', 
+                    fill_color='00ff00', 
                     graph_color='00ff00', 
                     margin_y=0
                     ),
-                widget.Net(format='▼{down: >8} ▲{up: >7}'),
+                widget.TextBox(text='⌔', fontsize=24),
+                widget.Wlan(interface='wlp4s0', format='{percent:2.0%}'),                
                 widget.NetGraph(
                     border_color='444444', 
-                    fill_color='0000ff80', 
+                    fill_color='0000ff', 
                     graph_color='0000ff', 
                     margin_y=0
                     ),
-                widget.Wlan(interface='wlp4s0', format='{essid} {percent:2.0%}'),
-                widget.TextBox(text='|', fontsize=24),
+                widget.Net(format='▼{down: >8} ▲{up: >7}'),
+                widget.Spacer(),
+
+                #Battery/Brightness/Volume outputs
                 widget.Battery(
                     charge_char='▲', 
                     discharge_char='▼', 
-                    format="{char}{percent:2.0%} {hour:d}:{min:02d}", 
+                    format="{char}{percent:2.0%} {hour:d}:{min:02d} ", 
                     update_interval=15,
                     hide_threshold=0.95
                     ),
                 widget.TextBox(text='☀', fontsize=24),
-                widget.Backlight(backlight_name='intel_backlight'),
+                widget.Backlight(backlight_name='intel_backlight',fmt='{: >4}'),
                 widget.TextBox(text='♪', fontsize=24),
-	            widget.Volume(),
+	            widget.Volume(fmt='{: >4}'),
                 #widget.Systray(),
-                widget.TextBox(text='|', fontsize=24),
-                widget.Clock(format="%y %m %d %u %H %M %S "),
+                widget.Clock(format=" [%y %m %d] %u [%H %M %S] "),
             ],
             24,
             background="#00000080"
